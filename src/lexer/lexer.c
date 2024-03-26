@@ -6,7 +6,7 @@
 /*   By: ilbendib <ilbendib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:07:10 by ilbendib          #+#    #+#             */
-/*   Updated: 2024/03/25 15:00:39 by ilbendib         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:11:36 by ilbendib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,14 @@ int	type(char type)
 	
 }
 
-void type_manager(t_type_token *type)
+void type_manager(char *str, t_type_token type, t_token_list *list, int *pos)
 {
-	if (type == IN)
-		ft_in_manager(type);
-	else if (type == OUT)
-		ft_out_manager(type);
+	if (type == IN || type == OUT || type == APPEND || type== HEREDOC) 
+		*pos += ft_ioah_manager(str, type, list);
 	else if (type == PIPE)
-		ft_pipe_manager(type);
+		*pos += ft_pipe_manager(list, str);
 	else if (type == DOUBLE_QUOTE)
-		ft_double_quote_manager(type);
+		*pos += ft_double_quote_manager(list, str);
 	else if (type == SIMPLE_QUOTE)
-		ft_simple_quote_manager(type);
+		*pos += ft_simple_quote_manager(list, str);
 }
